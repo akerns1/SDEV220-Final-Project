@@ -4,10 +4,10 @@ from tkinter import messagebox
 class MyGUI:
     
     def __init__(self):
-        # Create window
+        # Create window 
         self.window = tk.Tk()
         self.window.geometry("800x500")
-        self.window.title("Feltz Bakery - Order Management System")
+        self.window.title("Foltz Bakery - Order Management System")
 
         # MENU BAR
         self.menu_bar = tk.Menu(self.window)
