@@ -1,0 +1,38 @@
+Cinnamon Bread, 3.50
+Jalapeño Cheddar Bread, 3.50
+Donut, 2.00
+Latte, 2.50
+Cinnamon Roll, 2.50
+Muffin, 3.00
+Cookie, 2.50
+Danish, 2.00
+Cream Cheese Cups, 2.75
+Cupcake, 3.25
+Mini Pie, 5.00
+Coffee Cake, 4.00
+
+
+self.button1 = tk.Button(self.button_frame, text="Cinnamon Bread", font=("Arial", 18))
+        self.button1.grid(row=0, column=0, sticky=tk.W+tk.E, padx=5)
+        self.button2 = tk.Button(self.button_frame, text="Jalapeño Bread", font=("Arial", 18))
+        self.button2.grid(row=0, column=1, sticky=tk.W+tk.E, padx=5)
+        self.button3 = tk.Button(self.button_frame, text="Donut", font=("Arial", 18))
+        self.button3.grid(row=0, column=2, sticky=tk.W+tk.E, padx=5)
+        self.button4 = tk.Button(self.button_frame, text="Latte", font=("Arial", 18))
+        self.button4.grid(row=1, column=0, sticky=tk.W+tk.E, padx=5)
+        self.button5 = tk.Button(self.button_frame, text="Cinnamon Roll", font=("Arial", 18))
+        self.button5.grid(row=1, column=1, sticky=tk.W+tk.E, padx=5)
+        self.button6 = tk.Button(self.button_frame, text="Muffin", font=("Arial", 18))
+        self.button6.grid(row=1, column=2, sticky=tk.W+tk.E, padx=5)
+        self.button7 = tk.Button(self.button_frame, text="Cookie", font=("Arial", 18))
+        self.button7.grid(row=2, column=0, sticky=tk.W+tk.E, padx=5)
+        self.button8 = tk.Button(self.button_frame, text="Danish", font=("Arial", 18))
+        self.button8.grid(row=2, column=1, sticky=tk.W+tk.E, padx=5)
+        self.button9 = tk.Button(self.button_frame, text="Cream Cheese Cup", font=("Arial", 18))
+        self.button9.grid(row=2, column=2, sticky=tk.W+tk.E, padx=5)
+        self.button10 = tk.Button(self.button_frame, text="Cupcake", font=("Arial", 18))
+        self.button10.grid(row=3, column=0, sticky=tk.W+tk.E, padx=5)
+        self.button11 = tk.Button(self.button_frame, text="Mini Pie", font=("Arial", 18))
+        self.button11.grid(row=3, column=1, sticky=tk.W+tk.E, padx=5)
+        self.button12 = tk.Button(self.button_frame, text="Coffee Cake", font=("Arial", 18))
+        self.button12.grid(row=3, column=2, sticky=tk.W+tk.E, padx=5)
