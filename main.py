@@ -105,8 +105,3 @@ if __name__ == "__main__":
     root.geometry("1200x600")
     root.mainloop()
     
-    """
-        def create_button(self, root, text, row, column):
-        button = tk.Button(root, text=text, command=lambda: self.button_command(text))
-        button.grid(row=4, column=4, padx=5, pady=5)
-    """
