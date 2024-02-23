@@ -25,26 +25,26 @@ class BakerySystem():
             ("Cream Cheese Cups", 2.75),
             ("Cupcake", 3.25),
             ("Mini Pie", 4.99),
-            ("Coffee Cake", 3.99),
-            ("Cake", 14.99)
+            ("Coffee Cake", 3.99)
         ]
 
         # AK2024 - Creation of two frames and the items
         self.items_frame = tk.Frame(self.root, bg='lightblue', padx=10, pady=10)
         self.items_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
-        self.order_frame = tk.Frame(self.root, bg='gray', padx=10, pady=10, width=150)
-        self.order_frame.pack(side=tk.RIGHT, fill=tk.BOTH, expand=False)
+        self.order_frame = tk.Frame(self.root, bg='lightgreen', padx=10, pady=10)
+        self.order_frame.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True)
 
         # AK2024 - Add widgets to Items Frame 
-        self.label_items = tk.Label(self.items_frame, text="Item Menu", font=('Helvetica 16 bold'), bg='lightblue')
-        self.label_items.grid(row=0)
+        self.label_items = tk.Label(self.items_frame, text="Item Menu", font=('Helvetica', 16), bg='lightblue')
+        self.label_items.pack(pady=10)
 
         # AK2024 - Add widgets to Current Order Frame
-        self.label_order = tk.Label(self.order_frame, text="Current Order", font=('Helvetica 16 bold'), bg='lightgray')
+        self.label_order = tk.Label(self.order_frame, text="Current Order", font=('Helvetica', 16), bg='lightgreen')
         self.label_order.pack(pady=10)
 
-        self.listbox = tk.Listbox(self.order_frame, font=("Times", 20), selectmode=tk.EXTENDED)
+        custom_font = font.Font(family="Times", size=20)
+        self.listbox = tk.Listbox(self.order_frame, font=custom_font)
         self.listbox.pack(padx=10,pady=10,fill=tk.BOTH, expand=True)
 
         # AK2024 - Delete button
@@ -52,26 +52,21 @@ class BakerySystem():
         self.delete_button.pack()
 
         # WHP2024 - Loop through item list
-        #for item_name, item_price in self.item_types:
-        #    self.create_button(self.items_frame, item_name, item_price)
-
-        for cols in range(4):
-            for rows in range(3):
-                button = self.create_button(self.items_frame, f"{cols}, {rows}", 1.00)
-                button.grid(sticky="ew", pady=3, row=rows+1, column=cols+1)
+        for item_name, item_price in self.item_types:
+            self.create_button(self.items_frame, item_name, item_price)
 
     # Creating buttons
     def create_button(self, root: tk.Frame, name: str, price: float) -> None:
         button = tk.Button(
             root, bg="#f0f0f0", 
-            font=("Times", 25), 
+            font=("Times", 15), 
             fg="#000000", 
             justify="center", 
             text=f"{name}: ${price}", 
             command=partial(self.add_item, name, price)
         )
-        return button
-                
+        button.pack(pady=3)
+
     # WHP2024 - Adding items
     def add_item(self, name: str, price: float) -> None:
         item: Item = Item(name, price, 1)
