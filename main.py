@@ -55,16 +55,24 @@ class BakerySystem():
         #for item_name, item_price in self.item_types:
         #    self.create_button(self.items_frame, item_name, item_price)
 
-        for cols in range(4):
-            for rows in range(3):
-                button = self.create_button(self.items_frame, f"{cols}, {rows}", 1.00)
+        num_columns = 3
+        num_rows = 4
+
+        for cols in range(num_columns):
+            for rows in range(num_rows):
+                # Calculate index
+                index = rows * num_columns + cols
+                item = self.item_types[index]
+
+                # Make button
+                button = self.create_button(self.items_frame, f"{self.item_types[index][0]}", self.item_types[index][1])
                 button.grid(sticky="ew", pady=3, row=rows+1, column=cols+1)
 
     # Creating buttons
     def create_button(self, root: tk.Frame, name: str, price: float) -> None:
         button = tk.Button(
             root, bg="#f0f0f0", 
-            font=("Times", 25), 
+            font=("Times", 15), 
             fg="#000000", 
             justify="center", 
             text=f"{name}: ${price}", 
