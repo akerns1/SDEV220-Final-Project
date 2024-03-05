@@ -4,6 +4,8 @@ from functools import partial
 from item import Item
 from order import Order
 from tkinter import messagebox
+from PIL import Image, ImageTk
+import os
 
 # AK2024 - List of available items
 item_types: list = [
@@ -21,11 +23,12 @@ item_types: list = [
     ("Cake", 14.99)
 ]
 
+# WHP2024 
 class BakerySystem():
     def __init__(self, root):
         self.root = root
         self.root.title("Foltz Bakery - Order Management System")
-        #root.resizable(width=False, height=False)
+
         # Run window
         self.root.protocol("WM_DELETE_WINDOW", self.on_close)
 
@@ -74,30 +77,48 @@ class BakerySystem():
         self.total_display = tk.Label(self.order_frame, textvariable=self.total_price, font=('Helvetica 16 bold'))
         self.total_display.pack()
 
-
-        # Generate buttons from list of available items
+        # WHP2024 & AK2024 - Generate buttons from list of available items in a grid pattern
+        num_items = len(item_types)
         num_columns = 3
-        num_rows = 4
+        num_rows = -(-num_items // num_columns)
 
-        for cols in range(num_columns):
-            for rows in range(num_rows):
-                # Calculate index
-                index = rows * num_columns + cols
-                item = item_types[index]
+        for index, item in enumerate(item_types):
+            # Calculate the position in the grid
+            row = index // num_columns
+            col = index % num_columns
 
-                # Make button
-                button = self.create_button(self.items_frame, f"{item_types[index][0]}", item_types[index][1])
-                button.grid(sticky="nsew", pady=5, padx=5, row=rows+1, column=cols+1)
+            # WHP2024 Make images
+            # Check if the file exists
+            if os.path.exists(f"./images/{item[0]}.jpg"):
+                print(f"./images/{item[0]}.jpg exists")
+
+                # Load the image using Pillow
+                image = Image.open(f"./images/{item[0]}.jpg")
+                # Resize the image as needed
+                image = image.resize((75, 75))  # Adjust the size as per your requirements
+
+                # Convert the image to PhotoImage
+                tk_image = ImageTk.PhotoImage(image)
+
+                # Make button with the image
+                button = self.create_button(self.items_frame, tk_image, item[0], item[1])
+                button.image = tk_image  # Keep a reference to avoid garbage collection
+                button.grid(sticky="nsew", pady=5, padx=5, row=row+1, column=col+1)
+            else:
+                print(f"./images/{item[0]}.jpg does not exist")
 
     # Creating buttons
-    def create_button(self, root: tk.Frame, name: str, price: float) -> None:
+    def create_button(self, root: tk.Frame, image: ImageTk.PhotoImage, name: str, price: float) -> None:
         button = tk.Button(
-            root, bg="#f0f0f0", 
+            self.items_frame, 
+            image=image, 
+            compound="top", 
+            bg="#f0f0f0", 
             font=("Times", 18), 
             fg="#000000", 
             justify="center", 
-            text=f"{name}: ${price}", 
-            command=partial(self.add_item, name, price)
+            text=f"{name}: ${price}",
+            command=partial(self.add_item, f"{name}", price)
         )
         
         return button
@@ -114,7 +135,7 @@ class BakerySystem():
 
         self.update_listbox()
 
-    # Delete button
+    # AK2024 Delete button
     def delete_item(self):
         # Reverse the order of selected indices to avoid index changes affecting subsequent deletions
         selected_indices = sorted(self.listbox.curselection())
@@ -140,7 +161,7 @@ class BakerySystem():
             self.listbox.insert(tk.END, f"{item.get_name()}: {item.get_price()}")
 
     def create_menu(self):
-        # MENU BAR
+        # WHP2024 Menu bar
         self.menu_bar = tk.Menu(self.root)
         # File menu
         self.file_menu = tk.Menu(self.menu_bar, tearoff=0)
